@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div.seat {
+            display: inline-block;
+            color: #444;
+            border: 1px solid #CCC;
+            background: #DDD;
+            box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            vertical-align: middle;
+            max-width: 100px;
+            padding: 5px;
+            margin: 5px;
+            text-align: center;
+        }
+
+        div.seat:active {
+            color: red;
+            box-shadow: 0 0 5px -1px rgba(0, 0, 0, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board"></div>
+
+    <div id="hall"></div>
+
+    <script>
+        (function () {
+            let guests = [
+                { id: "a", name: "Guest A", seat: "Seat A" },
+                { id: "b", name: "Guest B", seat: "Seat B" },
+                { id: "c", name: "Guest C", seat: "Seat C" },
+                { id: "d", name: "Guest D", seat: "Seat D" },
+                { id: "e", name: "Guest E", seat: "Seat E" }
+            ];
+
+            let board = document.getElementById("board");
+            let hall = document.getElementById("hall");
+
+            let seats = guests.map(guest => {
+                let div = document.createElement("div");
+                div.classList.add("seat");
+
+                div.id = guest.id;
+                div.textContent = guest.name;
+                div.dataset.number = guest.seat;
+
+                return div;
+            });
+
+            seats.forEach(seat => {
+                seat.addEventListener("click", event => {
+                    board.textContent = seat.dataset.number;
+                });
+
+                hall.appendChild(seat);
+            });
+        })();
+    </script>
+</body>
+
+</html>
